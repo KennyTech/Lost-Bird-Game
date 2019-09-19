@@ -1,8 +1,9 @@
 //[MAIN]
 
-import { CreatePagodas, CreateBasePond } from "./Scenes/Pond";
+import { CreatePagodas, CreateBasePond, CreateFoliage } from "./Scenes/Pond";
 
 CreatePagodas();
 CreateBasePond();
+CreateFoliage();
 
 // Good job Fukuzawa much efficient code
