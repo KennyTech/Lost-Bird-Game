@@ -47,6 +47,14 @@ export function CreateBasePond(): void {
         new GLTFShape("models/Rock_3.glb"),
         { position: new Vector3(3, 0, 15) }
     );
+    const fish_1 = new basicObject(
+        new GLTFShape("models/Bird_1.glb"),
+        { position: new Vector3(-25, 2.5, 5) }
+    );
+    const bird_1 = new basicObject(
+        new GLTFShape("models/Fish_1.glb"),
+        { position: new Vector3(-25, 0.5, 5) }
+    );
 }
 
 export function CreateFoliage(): void {
