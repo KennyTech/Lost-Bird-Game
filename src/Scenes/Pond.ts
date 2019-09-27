@@ -84,6 +84,10 @@ export function CreateFoliage(): void {
         new GLTFShape("models/PalmTree.glb"),
         { position: new Vector3(0, 0, 0) }
     )
+    const grass_new = new basicObject(
+        new GLTFShape("models/Grass_new.glb"),
+        { position: new Vector3(-5, 0, 0)}
+    )
 }
 
 export function CreatePlatforms(): void{
@@ -99,9 +103,36 @@ export function CreatePlatforms(): void{
         new GLTFShape("models/Platform_1.glb"),
         { position: new Vector3(-25.8, 1.8 - (0.8 * 2), -3.2) }
     )
-    const platform_1_4= new basicObject(
+    const platform_1_4 = new basicObject(
         new GLTFShape("models/Platform_1.glb"),
         { position: new Vector3(-25.8, 1.8 - (0.8 * 3), -5) }
+    )
+    const platform_1_5 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-28, 1.8, -8) }
+    )
+    const platform_1_6 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-30, 1.8, -4) }
+    )
+    const platform_1_7 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-34, 1.8, -2) }
+    )
+    const platform_1_8 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-38, 1.8, -4) }
+    )
+    const platform_1_9 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-42, 1.8, -2) }
+    )
+    const platform_1_10 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        new Transform({
+            position: new Vector3(-46, 2.5, -4),
+            rotation: Quaternion.Euler(0, 0, -90)
+        })
     )
 }
 
