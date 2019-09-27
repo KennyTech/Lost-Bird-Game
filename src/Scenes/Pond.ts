@@ -59,25 +59,25 @@ export function CreateBasePond(): void {
 
 export function CreateFoliage(): void {
     const grass_1 = new basicObject(
-        new GLTFShape("models/Grass.glb"),
+        new GLTFShape("models/Grass_new.glb"),
         new Transform({
             position: new Vector3(-19, .5, -2),
             rotation: Quaternion.Euler(0, 180, 0)
         })
     )
     const grass_2 = new basicObject(
-        new GLTFShape("models/Grass.glb"),
+        new GLTFShape("models/Grass_new.glb"),
         new Transform({
             position: new Vector3(-15, 0.7, 4),
             rotation: Quaternion.Euler(0, 45, 0)
         })
     )
     const grass_3 = new basicObject(
-        new GLTFShape("models/Grass.glb"),
+        new GLTFShape("models/Grass_new.glb"),
         { position: new Vector3(-14, 0.65, -3) }
     )
     const grass_4 = new basicObject(
-        new GLTFShape("models/Grass.glb"),
+        new GLTFShape("models/Grass_new.glb"),
         { position: new Vector3(-32, .65, 5) }
     )
     const palmTree = new basicObject(
