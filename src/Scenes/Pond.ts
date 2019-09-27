@@ -1,6 +1,6 @@
 //[SCENE THAT CREATES PAGODA]
 
-import { basicObject } from "../Game_Objects/index";
+import { basicObject, createGrass } from "../Game_Objects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreatePagodas(): void {
@@ -88,7 +88,22 @@ export function CreateFoliage(): void {
         new GLTFShape("models/Grass_new.glb"),
         { position: new Vector3(-5, 0, 0)}
     )
+    const grass_new_animated_1 = new createGrass(
+        { position: new Vector3(-6, 0, 3)}
+    )
+    const grass_new_animated_2 = new createGrass(
+        { position: new Vector3(-8, 0, 3)}
+    )
+
+    for (let x = 0; x < 10; x += 1) {
+        for (let z = 0; z < 10; z += 1) {
+            const grass_new_animated_3 = new createGrass(
+                { position: new Vector3(x-15, 0.85-0.1*x, z)}
+            )
+        }
+    }
 }
+
 
 export function CreatePlatforms(): void{
     const platform_1_1 = new basicObject(
