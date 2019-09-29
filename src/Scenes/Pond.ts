@@ -95,13 +95,13 @@ export function CreateFoliage(): void {
         { position: new Vector3(-8, 0, 3)}
     )
 
-    for (let x = 0; x < 10; x += 1) {
-        for (let z = 0; z < 10; z += 1) {
-            const grass_new_animated_3 = new createGrass(
-                { position: new Vector3(x-15, 0.85-0.1*x, z)}
-            )
-        }
-    }
+    // for (let x = 0; x < 10; x += 1) {
+    //     for (let z = 0; z < 10; z += 1) {
+    //         const grass_new_animated_3 = new createGrass(
+    //             { position: new Vector3(x-15, 0.85-0.1*x, z)}
+    //         )
+    //     }
+    // }
 }
 
 
@@ -140,110 +140,25 @@ export function CreatePlatforms(): void{
     )
     const platform_1_9 = new basicObject(
         new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3(-42, 1.8, -2) }
+        { position: new Vector3(-40, 1.8, 0) }
     )
     const platform_1_10 = new basicObject(
         new GLTFShape("models/Platform_1.glb"),
         new Transform({
-            position: new Vector3(-46, 2.5, -4),
+            position: new Vector3(-46, 2.5, 10),
             rotation: Quaternion.Euler(0, 0, -90)
         })
     )
-}
+    const platform_1_11 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-40, 1.8, 3) }
+    )
 
-// DONT USE
-export function CreatePlatforms_TEST(): void{
-    let elevationDiff = 0.8 //Elevation diff in vertical platform movement
-    let horizontalDiff = 2.4
-
-    const platform_1_1 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3(-28, 1.8, -10) }
-    )
-    const platform_1_2 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3(-27, 1.8, -5) }
-    )
-    const platform_1_3 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3 }
-        //{ position: new Vector3(-26, 1.8, 0) }
-    )
-    const platform_1_4 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3 }
-        //{ position: new Vector3(-25, 1.8, 5) }
-    )
-    const platform_1_5 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3(-24, 1.8, 10) }
-    )
-    const platform_1_6 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        new Transform({
-            position: new Vector3(-30, 2.4, -12),
-            rotation: Quaternion.Euler(90, 0, 0)
-        })
-    )
-    const platform_1_7 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        new Transform({
-            position: new Vector3(-32, 2.4, -12),
-            rotation: Quaternion.Euler(90, 0, 0)
-        })
-    )
-    const platform_1_8 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        new Transform({
-            position: new Vector3(-34, 2.4, -12),
-            rotation: Quaternion.Euler(90, 0, 0)
-        })
-    )
-    const platform_1_9 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        new Transform({
-            position: new Vector3(-37, 1.8, -10)
-        })
-    )
-    
-    let path_platform_1_3 = []
-    let path_platform_1_4 = []
-    let path_platform_1_6 = []
-    let path_platform_1_7 = []
-    let path_platform_1_8 = []
-    path_platform_1_3[0] = new Vector3(-26, 1 + elevationDiff, 0)
-    path_platform_1_3[1] = new Vector3(-26, 1, 0)
-    path_platform_1_3[2] = new Vector3(-26, 1 + elevationDiff, 0)
-    
-    path_platform_1_4[0] = new Vector3(-25, 1.4 - elevationDiff, 5)
-    path_platform_1_4[1] = new Vector3(-25, 1.4, 5)
-    path_platform_1_4[2] = new Vector3(-25, 1.4 - elevationDiff, 5)
-
-    path_platform_1_6[0] = new Vector3(-30, 2.4, -12 - horizontalDiff)
-    path_platform_1_6[1] = new Vector3(-30, 2.4, -12)
-    path_platform_1_6[2] = new Vector3(-30, 2.4, -12 - horizontalDiff)
-
-    path_platform_1_7[0] = new Vector3(-32, 2.4, -12)
-    path_platform_1_7[1] = new Vector3(-32, 2.4, -12 - horizontalDiff)
-    path_platform_1_7[2] = new Vector3(-32, 2.4, -12)
-
-    path_platform_1_8[0] = new Vector3(-34, 2.4, -12 - horizontalDiff)
-    path_platform_1_8[1] = new Vector3(-34, 2.4, -12)
-    path_platform_1_8[2] = new Vector3(-34, 2.4, -12 - horizontalDiff)
-
-    platform_1_3.addComponent(new utils.Interval(4, () => {
-        platform_1_3.addComponent(new utils.FollowPathComponent(path_platform_1_3, 4));
-    }))
-    platform_1_4.addComponent(new utils.Interval(4, () => {
-        platform_1_4.addComponent(new utils.FollowPathComponent(path_platform_1_4, 4));
-    }))
-    platform_1_6.addComponent(new utils.Interval(4, () => {
-        platform_1_6.addComponent(new utils.FollowPathComponent(path_platform_1_6, 4));
-    }))
-    platform_1_7.addComponent(new utils.Interval(4, () => {
-        platform_1_7.addComponent(new utils.FollowPathComponent(path_platform_1_7, 4));
-    }))
-    platform_1_8.addComponent(new utils.Interval(4, () => {
-        platform_1_8.addComponent(new utils.FollowPathComponent(path_platform_1_8, 4));
+    let path_1_1 = []
+    path_1_1[0] = new Vector3(-40, 1.8, 3)
+    path_1_1[1] = new Vector3(-40, 1.8, 10)
+    path_1_1[2] = new Vector3(-40, 1.8, 3)
+    platform_1_11.addComponent(new utils.Interval(4, () => {
+        platform_1_11.addComponent(new utils.FollowPathComponent(path_1_1, 4));
     }))
 }
