@@ -2,7 +2,8 @@
 
 // Import Game Objects
 import { basicObject } from "./basicObject";
-import { createGrass} from "./createGrass";
+import { createGrass } from "./createGrass";
+import { glowPlatform } from "./glowPlatform";
 
 // Make them available by name
-export { basicObject, createGrass };
+export { basicObject, createGrass, glowPlatform };

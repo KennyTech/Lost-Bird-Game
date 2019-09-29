@@ -1,6 +1,6 @@
 //[SCENE THAT CREATES PAGODA]
 
-import { basicObject, createGrass } from "../Game_Objects/index";
+import { basicObject, createGrass, glowPlatform } from "../Game_Objects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreatePagodas(): void {
@@ -88,12 +88,47 @@ export function CreateFoliage(): void {
         new GLTFShape("models/Grass_new.glb"),
         { position: new Vector3(-5, 0, 0)}
     )
+
     const grass_new_animated_1 = new createGrass(
         { position: new Vector3(-6, 0, 3)}
     )
     const grass_new_animated_2 = new createGrass(
         { position: new Vector3(-8, 0, 3)}
     )
+
+    const rune = new basicObject(
+        new GLTFShape("models/Rune_rock.glb"),
+        { position: new Vector3(-8, 1, 3)}
+    )
+
+    // Clicking this rune is supposed to eventually activate all the platforms (make them rise up from the ground)
+    rune.addComponent(new Animator)
+    let spinClip1 = new AnimationState('spin')
+    rune.getComponent(Animator).addClip(spinClip1)
+    let anim = rune.getComponent(Animator).getClip('spin')
+    rune.addComponent(new OnClick(e => {
+        log('clicked rune rock')
+        anim.play()
+        anim.looping = false
+        }))
+    engine.addEntity(rune)
+
+    /*
+    const slime_1 = new basicObject(
+        new GLTFShape("models/Slime_2.glb"),
+        { position: new Vector3(-10, 1, 3)}
+    )
+
+    slime_1.addComponent(new Animator)
+    let slimeClip = new AnimationState('bounce')
+    slime_1.getComponent(Animator).addClip(slimeClip)
+    slime_1.addComponent(new OnClick(e => {
+        }))
+    engine.addEntity(slime_1)
+    let anim = slime_1.getComponent(Animator).getClip('bounce')
+    anim.play()
+    */
+
 
     // for (let x = 0; x < 10; x += 1) {
     //     for (let z = 0; z < 10; z += 1) {
@@ -106,47 +141,38 @@ export function CreateFoliage(): void {
 
 
 export function CreatePlatforms(): void{
-    const platform_1_1 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_1 = new glowPlatform(
         { position: new Vector3(-24, 1.8, -5) }
     )
-    const platform_1_2 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_2 = new glowPlatform(
         { position: new Vector3(-24, 1.8 - (0.8 * 1), -3.2) }
     )
-    const platform_1_3 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_3 = new glowPlatform(
         { position: new Vector3(-25.8, 1.8 - (0.8 * 2), -3.2) }
     )
-    const platform_1_4 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_4 = new glowPlatform(
         { position: new Vector3(-25.8, 1.8 - (0.8 * 3), -5) }
     )
-    const platform_1_5 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_5 = new glowPlatform(
         { position: new Vector3(-28, 1.8, -8) }
     )
-    const platform_1_6 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_6 = new glowPlatform(
         { position: new Vector3(-30, 1.8, -4) }
     )
-    const platform_1_7 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_7 = new glowPlatform(
         { position: new Vector3(-34, 1.8, -2) }
     )
-    const platform_1_8 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_8 = new glowPlatform(
         { position: new Vector3(-38, 1.8, -4) }
     )
-    const platform_1_9 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
-        { position: new Vector3(-40, 1.8, 0) }
+    const platform_1_9 = new glowPlatform(
+        { position: new Vector3(-40.5, 1.8, 0) }
     )
-    const platform_1_10 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_1_10 = new glowPlatform(
         new Transform({
-            position: new Vector3(-46, 2.5, 10),
-            rotation: Quaternion.Euler(0, 0, -90)
+            position: new Vector3(-43, 2.5, 10),
+            rotation: Quaternion.Euler(0, 0, -90),
+            scale: new Vector3(1.0, 1.8, 1.0)
         })
     )
     const platform_1_11 = new basicObject(
@@ -154,6 +180,22 @@ export function CreatePlatforms(): void{
         { position: new Vector3(-40, 1.8, 3) }
     )
 
+    class SimpleMove implements ISystem {
+        update() {
+            let transform = myEntity.getComponent(Transform)
+            let distance = Vector3.Forward().scale(0.1)
+            transform.translate(distance)
+        }
+    }
+    engine.addSystem(new SimpleMove())
+      
+    const myEntity = new Entity()
+    myEntity.addComponent(new Transform())
+    myEntity.addComponent(new BoxShape())
+      
+    engine.addEntity(myEntity)
+
+    /*
     let path_1_1 = []
     path_1_1[0] = new Vector3(-40, 1.8, 3)
     path_1_1[1] = new Vector3(-40, 1.8, 10)
@@ -161,4 +203,6 @@ export function CreatePlatforms(): void{
     platform_1_11.addComponent(new utils.Interval(4, () => {
         platform_1_11.addComponent(new utils.FollowPathComponent(path_1_1, 4));
     }))
+    */
+    
 }

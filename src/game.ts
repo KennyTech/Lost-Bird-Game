@@ -7,10 +7,114 @@ CreateBasePond();
 CreateFoliage();
 CreatePlatforms();
 
-// Good job Fukuzawa much efficient code
+/* ==============================
+ * ====== BACKGROUND MUSIC ======
+ * ============================== */
+const musicEntity = new Entity()
 
-// Particle Test
+let song = new AudioClip("sounds/One Way Home.mp3")
+//let song = new AudioClip("sounds/Deep Under.mp3")
+//let song = new AudioClip("sounds/Forgotten.mp3")
+//let song = new AudioClip("sounds/Vision.mp3")
 
+let music = new AudioSource(song)
+music.playing = true
+musicEntity.addComponent(music)
+engine.addEntity(musicEntity)
+
+/* ==============================
+ * ========== Slime AI ==========
+ * ============================== */
+
+import { LerpData, LerpMove } from "./modules/walk";
+import { SwitchGoals, Behavior, Goal, setCreatureGoal } from "./modules/goalManager";
+
+// Init
+export const camera = Camera.instance
+engine.addSystem(new SwitchGoals())
+engine.addSystem(new LerpMove())
+
+// ==========
+
+export function setAnimations(creature: IEntity) {
+  let sit = creature.getComponent(Animator).getClip('bounce')
+  let stand = creature.getComponent(Animator).getClip('bounce')
+  let walk = creature.getComponent(Animator).getClip('bounce')
+  let drink = creature.getComponent(Animator).getClip('bounce')
+  let idle = creature.getComponent(Animator).getClip('bounce')
+
+  sit.playing = false
+  stand.playing = false
+  walk.playing = false
+  drink.playing = false
+  idle.playing = false
+
+  switch (creature.getComponent(Behavior).goal) {
+    case Goal.Sit:
+	  sit.playing = true
+	  //sit.looping = false
+      break
+    case Goal.Follow:
+      walk.playing = true
+      walk.looping = true
+    case Goal.GoDrink:
+      walk.playing = true
+      break
+    case Goal.Drinking:
+      drink.playing = true
+      break
+    case Goal.Idle:
+      idle.playing = true
+      break
+  }
+  if (creature.getComponent(Behavior).previousGoal == Goal.Sit) {
+	stand.playing = true
+	//sit.looping = false
+  }
+}
+
+const creature = new Entity()
+creature.addComponent(new GLTFShape('models/Bird_1.gltf'))
+creature.addComponent(new Animator())
+let idleAnimation = new AnimationState('fly')
+
+creature.getComponent(Animator).addClip(idleAnimation)
+
+creature.getComponent(Animator)
+  .getClip('fly')
+  .play()
+
+creature.addComponent(new Transform({
+  position: new Vector3(-10, 1, 3)
+}))
+creature.addComponent(new Behavior())
+creature.addComponent(new LerpData())
+creature.addComponent(
+  new OnClick(e => {
+    log('clicked creature: following')
+    setCreatureGoal(creature, Goal.Follow)
+    /*
+    if (creature.getComponent(Behavior).goal == Goal.Sit) {
+	  setCreatureGoal(creature, Goal.Idle)
+    } else {
+      setCreatureGoal(creature, Goal.Sit)
+      creature.getComponent(LerpData).fraction = 1
+    }
+    */
+  })
+)
+engine.addEntity(creature)
+
+
+
+// ===== End of Slime AI =====
+
+
+/* ===============================
+ * ======= Particle System =======
+ * =============================== */
+
+ /*
 const particleColor = new Color3(0.5, 0.1, 1)
 
 @Component('particle')
@@ -86,3 +190,7 @@ for (let i = 0; i < 50; i++) {
 }
 
 engine.addSystem(new ParticleSystem())
+
+*/ 
+
+// === End of Particle System ===
