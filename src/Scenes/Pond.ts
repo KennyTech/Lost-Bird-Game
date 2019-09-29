@@ -1,4 +1,4 @@
-//[SCENE THAT CREATES PAGODA]
+//[SCENE THAT CREATES POND SCENE]
 
 import { basicObject, createGrass } from "../Game_Objects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
@@ -152,6 +152,10 @@ export function CreatePlatforms(): void{
     const platform_1_11 = new basicObject(
         new GLTFShape("models/Platform_1.glb"),
         { position: new Vector3(-40, 1.8, 3) }
+    )
+    const platform_1_12 = new basicObject(
+        new GLTFShape("models/Platform_1.glb"),
+        { position: new Vector3(-42, 1.8, 8) }
     )
 
     let path_1_1 = []

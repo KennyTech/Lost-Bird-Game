@@ -1,11 +1,13 @@
 //[MAIN]
 
 import { CreatePagodas, CreateBasePond, CreateFoliage, CreatePlatforms } from "./Scenes/Pond";
+import { CreateBaseIsle } from "./Scenes/Isle";
 
 CreatePagodas();
 CreateBasePond();
 CreateFoliage();
 CreatePlatforms();
+CreateBaseIsle();
 
 // Good job Fukuzawa much efficient code
 
