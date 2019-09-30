@@ -1,13 +1,15 @@
 //[MAIN]
 
 import { CreatePagodas, CreateBasePond, CreateFoliage, CreatePlatforms } from "./Scenes/Pond";
-import { CreateBaseIsle } from "./Scenes/Isle";
+import { CreateBaseIsle, CreateIsleProps, CreateIslePlatforms } from "./Scenes/Isle";
 
 CreatePagodas();
 CreateBasePond();
 CreateFoliage();
 CreatePlatforms();
 CreateBaseIsle();
+CreateIsleProps();
+CreateIslePlatforms();
 
 /* ==============================
  * ====== BACKGROUND MUSIC ======

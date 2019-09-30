@@ -141,46 +141,44 @@ export function CreateFoliage(): void {
 
 
 export function CreatePlatforms(): void{
-    const platform_1_1 = new glowPlatform(
+    const platform_1 = new glowPlatform(
         { position: new Vector3(-24, 1.8, -5) }
     )
-    const platform_1_2 = new glowPlatform(
+    const platform_2 = new glowPlatform(
         { position: new Vector3(-24, 1.8 - (0.8 * 1), -3.2) }
     )
-    const platform_1_3 = new glowPlatform(
+    const platform_3 = new glowPlatform(
         { position: new Vector3(-25.8, 1.8 - (0.8 * 2), -3.2) }
     )
-    const platform_1_4 = new glowPlatform(
+    const platform_4 = new glowPlatform(
         { position: new Vector3(-25.8, 1.8 - (0.8 * 3), -5) }
     )
-    const platform_1_5 = new glowPlatform(
+    const platform_5 = new glowPlatform(
         { position: new Vector3(-28, 1.8, -8) }
     )
-    const platform_1_6 = new glowPlatform(
+    const platform_6 = new glowPlatform(
         { position: new Vector3(-30, 1.8, -4) }
     )
-    const platform_1_7 = new glowPlatform(
+    const platform_7 = new glowPlatform(
         { position: new Vector3(-34, 1.8, -2) }
     )
-    const platform_1_8 = new glowPlatform(
+    const platform_8 = new glowPlatform(
         { position: new Vector3(-38, 1.8, -4) }
     )
-    const platform_1_9 = new glowPlatform(
+    const platform_9 = new glowPlatform(
         { position: new Vector3(-40.5, 1.8, 0) }
     )
-    const platform_1_10 = new glowPlatform(
+    const platform_10 = new glowPlatform(
         new Transform({
             position: new Vector3(-43, 2.5, 10),
             rotation: Quaternion.Euler(0, 0, -90),
             scale: new Vector3(1.0, 1.8, 1.0)
         })
     )
-    const platform_1_11 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_11 = new glowPlatform(
         { position: new Vector3(-40, 1.8, 3) }
     )
-    const platform_1_12 = new basicObject(
-        new GLTFShape("models/Platform_1.glb"),
+    const platform_12 = new glowPlatform(
         { position: new Vector3(-42, 1.8, 8) }
     )
 
