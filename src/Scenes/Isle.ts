@@ -32,22 +32,22 @@ export function CreateIslePlatforms(): void {
         { position: new Vector3(-125, 12.5, -50) }
     )
     const platform_4 = new glowPlatform(
-        { position: new Vector3(-125, 12, -55) }
+        { position: new Vector3(-125, 11.8, -55) }
     )
     const platform_5 = new glowPlatform(
-        { position: new Vector3(-122, 12, -58) }
+        { position: new Vector3(-122, 11, -58) }
     )
     const platform_6 = new glowPlatform(
-        { position: new Vector3(-117, 12, -58) }
+        { position: new Vector3(-117, 11, -58) }
     )
     const platform_7 = new glowPlatform(
-        { position: new Vector3(-114, 12, -55) }
+        { position: new Vector3(-114, 11.5, -54) }
     )
     const platform_8 = new glowPlatform(
-        { position: new Vector3(-114, 12.5, -50) }
+        { position: new Vector3(-114, 11.5, -50) }
     )
     const platform_9 = new glowPlatform(
-        { position: new Vector3(-114, 13, -45) }
+        { position: new Vector3(-114, 11.5, -45) }
     )
     const platform_10 = new glowPlatform(
         { position: new Vector3(0,0,0) }
@@ -56,12 +56,15 @@ export function CreateIslePlatforms(): void {
         { position: new Vector3(0,0,0) }
     )
     const platform_12 = new glowPlatform(
-        { position: new Vector3(-122.3, 12, -30) }
+        new Transform({
+            position: new Vector3(-125.5, 12.5, -28.5),
+            rotation: Quaternion.Euler(-90, 0, 0)
+       })
     )
     const Big_Bird = new basicObject(
         new GLTFShape("models/Big_Bird.glb"),
         new Transform({
-             position: new Vector3(-100, 0, 0),
+             position: new Vector3(-90, 0, 0),
              rotation: Quaternion.Euler(90, 0, -115)
         })
     )
@@ -79,18 +82,18 @@ export function CreateIslePlatforms(): void {
     Big_Bird2.addComponent(new utils.KeepRotatingComponent(Quaternion.Euler(0, 45, 0)))
 
     let path_1 = []
-    path_1[0] = new Vector3(-114, 13, -40)
-    path_1[1] = new Vector3(-124, 13, -40)
-    path_1[2] = new Vector3(-114, 13, -40)
+    path_1[0] = new Vector3(-114, 11.8, -40)
+    path_1[1] = new Vector3(-124, 11.8, -40)
+    path_1[2] = new Vector3(-114, 11.8, -40)
     platform_10.addComponent(new utils.Interval(7, () => {
         platform_10.addComponent(new utils.FollowPathComponent(path_1, 7));
     }))
     let path_2 = []
-    path_2[0] = new Vector3(-124, 13, -37.75)
-    path_2[1] = new Vector3(-114, 13, -37.75)
-    path_2[2] = new Vector3(-124, 13, -37.75)
-    path_2[3] = new Vector3(-124, 13, -30)
-    path_2[4] = new Vector3(-124, 13, -37.75)
+    path_2[0] = new Vector3(-124, 11.8, -37.75)
+    path_2[1] = new Vector3(-114, 11.8, -37.75)
+    path_2[2] = new Vector3(-124, 11.8, -37.75)
+    path_2[3] = new Vector3(-124, 11.8, -30)
+    path_2[4] = new Vector3(-124, 11.8, -37.75)
     platform_11.addComponent(new utils.Interval(7, () => {
         platform_11.addComponent(new utils.FollowPathComponent(path_2, 7));
     }))
@@ -107,32 +110,32 @@ export function CreateIslePlatforms(): void {
     }))
     const platform_14 = new glowPlatform(
         new Transform({
-            position: new Vector3(-230.5, 24, -52.8),
+            position: new Vector3(-229, 24, -52.8),
             rotation: Quaternion.Euler(0, 0, -90)
         })
     )
     const platform_15 = new glowPlatform(
         new Transform({
-            position: new Vector3(-230.5, 25.2, -51),
+            position: new Vector3(-229, 25.2, -51),
             rotation: Quaternion.Euler(0, 0, -90)
         })
     )
     const platform_16 = new glowPlatform(
         new Transform({
-            position: new Vector3(-230.5, 26.4, -49.2),
+            position: new Vector3(-229, 26.4, -49.2),
             rotation: Quaternion.Euler(0, 0, -90)
         })
     )
     const platform_17 = new glowPlatform(
         new Transform({
-            position: new Vector3(-230.5, 27.6, -51),
+            position: new Vector3(-229, 27.6, -51),
             rotation: Quaternion.Euler(0, 0, -90)
         })
     )
     let path_4 = []
-    path_4[0] = new Vector3(-230.5, 27.6, -51)
+    path_4[0] = new Vector3(-229, 27.6, -51)
     path_4[1] = new Vector3(-232, 27.6, -51)
-    path_4[2] = new Vector3(-230.5, 27.6, -51)
+    path_4[2] = new Vector3(-229, 27.6, -51)
     platform_17.addComponent(new utils.Interval(4, () => {
         platform_17.addComponent(new utils.FollowPathComponent(path_4, 4));
     }))
