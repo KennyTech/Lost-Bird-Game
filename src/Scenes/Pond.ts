@@ -6,13 +6,9 @@ import utils from "../../node_modules/decentraland-ecs-utils/index";
 export function CreatePagodas(): void {
     const pagoda1 = new basicObject(
         new GLTFShape("models/Pagoda.glb"),
-        { position: new Vector3(-31, 1, 6) }
-    );
-    const pagoda2 = new basicObject(
-        new GLTFShape("models/Pagoda.glb"),
         { position: new Vector3(-17, 1, 3) }
     );
-    const pagoda3 = new basicObject(
+    const pagoda2 = new basicObject(
         new GLTFShape("models/Pagoda.glb"),
         { position: new Vector3(-17, 1, -3) }
     );
@@ -96,23 +92,6 @@ export function CreateFoliage(): void {
         { position: new Vector3(-8, 0, 3)}
     )
 
-    const rune = new basicObject(
-        new GLTFShape("models/Rune_rock.glb"),
-        { position: new Vector3(-8, 1, 3)}
-    )
-
-    // Clicking this rune is supposed to eventually activate all the platforms (make them rise up from the ground)
-    rune.addComponent(new Animator)
-    let spinClip1 = new AnimationState('spin')
-    rune.getComponent(Animator).addClip(spinClip1)
-    let anim = rune.getComponent(Animator).getClip('spin')
-    rune.addComponent(new OnClick(e => {
-        log('clicked rune rock')
-        anim.play()
-        anim.looping = false
-        }))
-    engine.addEntity(rune)
-
     /*
     const slime_1 = new basicObject(
         new GLTFShape("models/Slime_2.glb"),
@@ -129,7 +108,6 @@ export function CreateFoliage(): void {
     anim.play()
     */
 
-
     // for (let x = 0; x < 10; x += 1) {
     //     for (let z = 0; z < 10; z += 1) {
     //         const grass_new_animated_3 = new createGrass(
@@ -141,70 +119,102 @@ export function CreateFoliage(): void {
 
 
 export function CreatePlatforms(): void{
-    const platform_1 = new glowPlatform(
-        { position: new Vector3(-24, 1.8, -5) }
+    const platform_1_1 = new glowPlatform(
+        { position: new Vector3(-24, -0.5, -5) }
     )
-    const platform_2 = new glowPlatform(
-        { position: new Vector3(-24, 1.8 - (0.8 * 1), -3.2) }
+    const platform_1_2 = new glowPlatform(
+        { position: new Vector3(-24, -0.5 - (0.8 * 1), -3.2) }
     )
-    const platform_3 = new glowPlatform(
-        { position: new Vector3(-25.8, 1.8 - (0.8 * 2), -3.2) }
+    const platform_1_3 = new glowPlatform(
+        { position: new Vector3(-25.8, -0.5 - (0.8 * 2), -3.2) }
     )
-    const platform_4 = new glowPlatform(
-        { position: new Vector3(-25.8, 1.8 - (0.8 * 3), -5) }
+    const platform_1_4 = new glowPlatform(
+        { position: new Vector3(-25.8, -0.5 - (0.8 * 3), -5) }
     )
-    const platform_5 = new glowPlatform(
-        { position: new Vector3(-28, 1.8, -8) }
+    const platform_1_5 = new glowPlatform(
+        { position: new Vector3(-28, -0.5, -8) }
     )
-    const platform_6 = new glowPlatform(
-        { position: new Vector3(-30, 1.8, -4) }
+    const platform_1_6 = new glowPlatform(
+        { position: new Vector3(-30, -0.5, -4) }
     )
-    const platform_7 = new glowPlatform(
-        { position: new Vector3(-34, 1.8, -2) }
+    const platform_1_7 = new glowPlatform(
+        { position: new Vector3(-34, -0.5, -2) }
     )
-    const platform_8 = new glowPlatform(
-        { position: new Vector3(-38, 1.8, -4) }
+    const platform_1_8 = new glowPlatform(
+        { position: new Vector3(-38, -0.5, -4) }
     )
-    const platform_9 = new glowPlatform(
-        { position: new Vector3(-40.5, 1.8, 0) }
+    const platform_1_9 = new glowPlatform(
+        { position: new Vector3(-40.5, -0.5, 0) }
     )
-    const platform_10 = new glowPlatform(
+    const platform_1_10 = new glowPlatform(
         new Transform({
-            position: new Vector3(-43, 2.5, 10),
+            position: new Vector3(-44.5, 2.5, 9),
             rotation: Quaternion.Euler(0, 0, -90),
-            scale: new Vector3(1.0, 1.8, 1.0)
+            scale: new Vector3(1.0, 1.5, 1.0)
         })
     )
-    const platform_11 = new glowPlatform(
-        { position: new Vector3(-40, 1.8, 3) }
+    const platform_1_11 = new glowPlatform(
+        { position: new Vector3(-39.5, -0.5, 3) }
     )
-    const platform_12 = new glowPlatform(
-        { position: new Vector3(-42, 1.8, 8) }
+    const platform_1_12 = new glowPlatform(
+        { position: new Vector3(-40.25, -0.5, 6.5) }
     )
 
-    class SimpleMove implements ISystem {
-        update() {
-            let transform = myEntity.getComponent(Transform)
-            let distance = Vector3.Forward().scale(0.1)
-            transform.translate(distance)
+    const rune = new basicObject(
+        new GLTFShape("models/Rune_rock.glb"),
+        {   position: new Vector3(-32, 0.3, 6),
+            rotation: Quaternion.Euler(0, -90, 0),
+            scale: new Vector3(0.9,0.9,0.9)
         }
-    }
-    engine.addSystem(new SimpleMove())
-      
-    const myEntity = new Entity()
-    myEntity.addComponent(new Transform())
-    myEntity.addComponent(new BoxShape())
-      
-    engine.addEntity(myEntity)
+    )
+    rune.addComponent(new Animator)
+    let spinClip1 = new AnimationState('spin')
+    rune.getComponent(Animator).addClip(spinClip1)
+    let anim = rune.getComponent(Animator).getClip('spin')
+    engine.addEntity(rune)
+    let runOnce = false
+    rune.addComponent(new OnClick(e => {
+        if (runOnce == false) 
+        {
+            runOnce = true
+            log('clicked rune rock')
+            anim.play()
+            anim.looping = false
 
-    /*
-    let path_1_1 = []
-    path_1_1[0] = new Vector3(-40, 1.8, 3)
-    path_1_1[1] = new Vector3(-40, 1.8, 10)
-    path_1_1[2] = new Vector3(-40, 1.8, 3)
-    platform_1_11.addComponent(new utils.Interval(4, () => {
-        platform_1_11.addComponent(new utils.FollowPathComponent(path_1_1, 4));
-    }))
-    */
+            // Sound Effect
+            let sound = new AudioClip("sounds/stones.mp3")
+            rune.addComponent(new AudioSource(sound))
+            rune.getComponent(AudioSource).playOnce()
+
+            // Glow
+            let glowAnim = platform_1_1.getComponent(Animator).getClip('glow')
+            anim.play()
+            platform_1_1.getComponent(AudioSource).playOnce()
+            anim.looping = false
+
+            // Rise Platforms
+            let counter = 0
+            class RisePlatforms {
+                update() {
+                    counter ++
+                    if (counter <= 180) {
+                        let increment = Vector3.Up().scale(0.011)
+                        platform_1_1.getComponent(Transform).translate(increment)
+                        platform_1_2.getComponent(Transform).translate(increment)
+                        platform_1_3.getComponent(Transform).translate(increment)
+                        platform_1_4.getComponent(Transform).translate(increment)
+                        platform_1_5.getComponent(Transform).translate(increment)
+                        platform_1_6.getComponent(Transform).translate(increment)
+                        platform_1_7.getComponent(Transform).translate(increment)
+                        platform_1_8.getComponent(Transform).translate(increment)
+                        platform_1_9.getComponent(Transform).translate(increment)
+                        platform_1_11.getComponent(Transform).translate(increment)
+                        platform_1_12.getComponent(Transform).translate(increment)
+                    }
+                }
+            }
+            engine.addSystem(new RisePlatforms())
+        }
+        }))
     
 }

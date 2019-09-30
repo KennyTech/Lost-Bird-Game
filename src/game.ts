@@ -1,5 +1,16 @@
 //[MAIN]
 
+/* Table of Contents: 
+ *    [1] Level & Object Creation
+ *    [2] Background Music
+ *    [3] Bird AI
+ *    [4] Particle System
+ */
+
+/* ========================================
+ * ===== [1] LEVEL & OBJECT CREATION ======
+ * ======================================== */
+
 import { CreatePagodas, CreateBasePond, CreateFoliage, CreatePlatforms } from "./Scenes/Pond";
 import { CreateBaseIsle, CreateIsleProps, CreateIslePlatforms } from "./Scenes/Isle";
 
@@ -11,41 +22,53 @@ CreateBaseIsle();
 CreateIsleProps();
 CreateIslePlatforms();
 
-/* ==============================
- * ====== BACKGROUND MUSIC ======
- * ============================== */
+// End of level & object creation
+
+/* =================================
+ * ===== [2] BACKGROUND MUSIC ======
+ * ================================= */
+
+// Adjustable Variables
+let songChoice = "sounds/Deep_Under.mp3" // Choices: Deep_Under.mp3, Forgotten.mp3
+
+// Declaration and setup
 const musicEntity = new Entity()
-
-let song = new AudioClip("sounds/One Way Home.mp3")
-//let song = new AudioClip("sounds/Deep Under.mp3")
-//let song = new AudioClip("sounds/Forgotten.mp3")
-//let song = new AudioClip("sounds/Vision.mp3")
-
+let song = new AudioClip(songChoice)
 let music = new AudioSource(song)
+
+// Play music
 music.playing = true
+music.loop = true
+music.volume = 1.0
 musicEntity.addComponent(music)
 engine.addEntity(musicEntity)
 
-/* ==============================
- * ========== Slime AI ==========
- * ============================== */
+// === End of background music ===
 
+/* ====================================
+ * ======== [3.1] Lite-bird AI ========
+ * ==================================== */
+
+// Adjustable Variables
+let animationName = "fly"
+let creatureModel = "models/Bird_1.gltf"
+
+// Import required packages
 import { LerpData, LerpMove } from "./modules/walk";
 import { SwitchGoals, Behavior, Goal, setCreatureGoal } from "./modules/goalManager";
 
-// Init
+// Initialization
 export const camera = Camera.instance
 engine.addSystem(new SwitchGoals())
 engine.addSystem(new LerpMove())
 
-// ==========
-
+// Setting animations and AI behavior
 export function setAnimations(creature: IEntity) {
-  let sit = creature.getComponent(Animator).getClip('bounce')
-  let stand = creature.getComponent(Animator).getClip('bounce')
-  let walk = creature.getComponent(Animator).getClip('bounce')
-  let drink = creature.getComponent(Animator).getClip('bounce')
-  let idle = creature.getComponent(Animator).getClip('bounce')
+  let sit = creature.getComponent(Animator).getClip(animationName)
+  let stand = creature.getComponent(Animator).getClip(animationName)
+  let walk = creature.getComponent(Animator).getClip(animationName)
+  let drink = creature.getComponent(Animator).getClip(animationName)
+  let idle = creature.getComponent(Animator).getClip(animationName)
 
   sit.playing = false
   stand.playing = false
@@ -55,8 +78,7 @@ export function setAnimations(creature: IEntity) {
 
   switch (creature.getComponent(Behavior).goal) {
     case Goal.Sit:
-	  sit.playing = true
-	  //sit.looping = false
+	    sit.playing = true
       break
     case Goal.Follow:
       walk.playing = true
@@ -73,52 +95,35 @@ export function setAnimations(creature: IEntity) {
   }
   if (creature.getComponent(Behavior).previousGoal == Goal.Sit) {
 	stand.playing = true
-	//sit.looping = false
   }
 }
 
+// Spawning in the creature
 const creature = new Entity()
-creature.addComponent(new GLTFShape('models/Bird_1.gltf'))
+creature.addComponent(new GLTFShape(creatureModel))
 creature.addComponent(new Animator())
-let idleAnimation = new AnimationState('fly')
+let idleAnimation = new AnimationState(animationName)
 
 creature.getComponent(Animator).addClip(idleAnimation)
 
-creature.getComponent(Animator)
-  .getClip('fly')
-  .play()
+creature.getComponent(Animator).getClip(animationName).play()
 
 creature.addComponent(new Transform({
   position: new Vector3(-10, 1, 3)
 }))
 creature.addComponent(new Behavior())
 creature.addComponent(new LerpData())
-creature.addComponent(
-  new OnClick(e => {
-    log('clicked creature: following')
-    setCreatureGoal(creature, Goal.Follow)
-    /*
-    if (creature.getComponent(Behavior).goal == Goal.Sit) {
-	  setCreatureGoal(creature, Goal.Idle)
-    } else {
-      setCreatureGoal(creature, Goal.Sit)
-      creature.getComponent(LerpData).fraction = 1
-    }
-    */
-  })
-)
 engine.addEntity(creature)
 
+// ===== End of Lite-bird AI =====
 
 
-// ===== End of Slime AI =====
-
-
-/* ===============================
- * ======= Particle System =======
- * =============================== */
+/* ================================
+ * ====== [4] Particle System ======
+ * ================================ */
 
  /*
+// Adjustable Variables
 const particleColor = new Color3(0.5, 0.1, 1)
 
 @Component('particle')
