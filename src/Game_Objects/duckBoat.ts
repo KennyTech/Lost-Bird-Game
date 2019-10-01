@@ -20,7 +20,7 @@ export class duckBoat extends Entity
         this.getComponent(Animator).addClip(platformClip)
         let anim = duck.getComponent(Animator).getClip('Action')
         //anim.play()
-        anim.speed = 0.5
+        anim.speed = 0.35
     
         // Distance Check Setup
         const camera = Camera.instance
@@ -50,9 +50,9 @@ export class duckBoat extends Entity
                 let x = camera.position.x
                 let y = camera.position.y
                 let z = camera.position.z
-                log('x ' + camera.position.x)
-                log('y ' + camera.position.y)
-                log('z ' + camera.position.z)
+                //log('x ' + camera.position.x)
+                //log('y ' + camera.position.y)
+                //log('z ' + camera.position.z)
                 if (x < -43 && x > -49 && y > 4.5 && z > 7 && z < 10 && runOnce1 == 0)
                 {
                     runOnce1++
@@ -65,7 +65,7 @@ export class duckBoat extends Entity
                     // Start tutorial dialogue 
                     dialog.run();
                 }
-                if (x < -51 && x > -53 && y > 5.8 && z < 1.4 && z > -1.8 && runOnce2 == 0) {
+                if (x < -51 && x > -53 && y > 5.0 && z < 1.4 && z > -1.8 && runOnce2 == 0) {
                     anim.play()
                     anim.looping = false
                     runOnce2++

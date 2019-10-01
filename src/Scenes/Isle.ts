@@ -22,6 +22,9 @@ export function CreateBaseIsle(): void {
     )
 }
 export function CreateIslePlatforms(): void {
+    const platform_0 = new glowPlatform(
+        { position: new Vector3(-130, 9.5, -54) }
+    )
     const platform_1 = new glowPlatform(
         { position: new Vector3(-130, 12.5, -50) }
     )
@@ -45,6 +48,9 @@ export function CreateIslePlatforms(): void {
     )
     const platform_8 = new glowPlatform(
         { position: new Vector3(-114, 11.5, -50) }
+    )
+    const platform_8_1 = new glowPlatform(
+        { position: new Vector3(-117, 12, -47.5) }
     )
     const platform_9 = new glowPlatform(
         { position: new Vector3(-114, 11.5, -45) }
@@ -75,10 +81,10 @@ export function CreateIslePlatforms(): void {
              //rotation: Quaternion.Euler(90, 0, -115)
         })
     )
-    const Cheat = new basicObject(
-        new GLTFShape("models/Cheat.glb"),
-        { position: new Vector3(0,0,0) }
-    )
+    // const Cheat = new basicObject(
+    //     new GLTFShape("models/Cheat.glb"),
+    //     { position: new Vector3(0,0,0) }
+    // )
     Big_Bird2.addComponent(new utils.KeepRotatingComponent(Quaternion.Euler(0, 45, 0)))
 
     let path_1 = []
@@ -178,6 +184,26 @@ export function CreateIsleProps(): void {
     // )
     const test = new basicObject(
         new GLTFShape("models/rock_tree.glb"),
+        { position: new Vector3(0, 0, 0) }
+    )
+    const nest = new basicObject(
+        new GLTFShape("models/Birds_nest.glb"),
+        { position: new Vector3(0, 0, 0) }
+    )
+    const path = new basicObject(
+        new GLTFShape("models/path.glb"),
+        { position: new Vector3(0, 0, 0) }
+    )
+    const flowers = new basicObject(
+        new GLTFShape("models/flowers.glb"),
+        { position: new Vector3(0, 0, 0) }
+    )
+    const mushrooms = new basicObject(
+        new GLTFShape("models/mushrooms.glb"),
+        { position: new Vector3(0, 0, 0) }
+    )
+    const lantern = new basicObject(
+        new GLTFShape("models/lantern.glb"),
         { position: new Vector3(0, 0, 0) }
     )
 }
