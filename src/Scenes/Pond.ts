@@ -1,6 +1,6 @@
 //[SCENE THAT CREATES POND SCENE]
 
-import { basicObject, createGrass, glowPlatform } from "../Game_Objects/index";
+import { basicObject, createGrass, glowPlatform, duckBoat } from "../Game_Objects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreatePagodas(): void {
@@ -160,6 +160,19 @@ export function CreatePlatforms(): void{
         { position: new Vector3(-40.25, -0.5, 6.5) }
     )
 
+    // For Quacky
+    const platform_1_13 = new glowPlatform(
+        { position: new Vector3(-50, 1.1, -6) }
+    )
+    const platform_1_14 = new glowPlatform(
+        { position: new Vector3(-50, 0.3, -8) }
+    )
+    //
+
+    const duck_1 = new duckBoat(
+        { position: new Vector3(0, -2, 0) }
+    )
+
     const rune = new basicObject(
         new GLTFShape("models/Rune_rock.glb"),
         {   position: new Vector3(-32, 0.3, 6),
@@ -214,6 +227,9 @@ export function CreatePlatforms(): void{
                 }
             }
             engine.addSystem(new RisePlatforms())
+
+
+
         }
         }))
     

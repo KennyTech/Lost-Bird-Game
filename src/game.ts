@@ -1,15 +1,17 @@
 //[MAIN]
 
 /* Table of Contents: 
- *    [1] Level & Object Creation
+ *    [1] Level & Object Creation & Dialogue
  *    [2] Background Music
  *    [3] Bird AI
- *    [4] Particle System
  */
 
-/* ========================================
- * ===== [1] LEVEL & OBJECT CREATION ======
- * ======================================== */
+ // GLOBALS
+ const camera = Camera.instance
+
+/* ==========================================
+ * ===== [1.1] LEVEL & OBJECT CREATION ======
+ * ========================================== */
 
 import { CreatePagodas, CreateBasePond, CreateFoliage, CreatePlatforms } from "./Scenes/Pond";
 import { CreateBaseIsle, CreateIsleProps, CreateIslePlatforms } from "./Scenes/Isle";
@@ -24,6 +26,27 @@ CreateIslePlatforms();
 
 // End of level & object creation
 
+/* ===========================
+ * ===== [1.2] DIALOGUE ======
+ * =========================== */
+
+import { TutorialDialogue } from "./Scenes/Tutorial";
+
+// Create game canvas UI
+const gameCanvas = new UICanvas();
+
+// Define the dialog tree
+const dialog = new TutorialDialogue(gameCanvas);
+
+// Start tutorial dialogue 
+dialog.run();
+
+// const voiceEnt = new Entity()
+// voiceEnt.addComponent(new Transform({ position: new Vector3(camera.position.x, camera.position.y, camera.position.z)}))
+// let voice1 = new AudioClip("sounds/bird_tutorial_voice.mp3")
+// voiceEnt.addComponent(new AudioSource(voice1))
+// voiceEnt.getComponent(AudioSource).playOnce()
+
 /* =================================
  * ===== [2] BACKGROUND MUSIC ======
  * ================================= */
@@ -33,6 +56,7 @@ let songChoice = "sounds/Deep_Under.mp3" // Choices: Deep_Under.mp3, Forgotten.m
 
 // Declaration and setup
 const musicEntity = new Entity()
+//musicEntity.addComponent(new Transform({ position: new Vector3(-246, 40, -49)})) // Position 3D sound at goal so it gets louder as you near it
 let song = new AudioClip(songChoice)
 let music = new AudioSource(song)
 
@@ -49,16 +73,17 @@ engine.addEntity(musicEntity)
  * ======== [3.1] Lite-bird AI ========
  * ==================================== */
 
+
 // Adjustable Variables
 let animationName = "fly"
-let creatureModel = "models/Bird_1.gltf"
+let creatureModel = "models/Etherbird_2.gltf"
 
 // Import required packages
 import { LerpData, LerpMove } from "./modules/walk";
 import { SwitchGoals, Behavior, Goal, setCreatureGoal } from "./modules/goalManager";
+import utils from "./../node_modules/decentraland-ecs-utils/index";
 
 // Initialization
-export const camera = Camera.instance
 engine.addSystem(new SwitchGoals())
 engine.addSystem(new LerpMove())
 
@@ -113,93 +138,93 @@ creature.addComponent(new Transform({
 }))
 creature.addComponent(new Behavior())
 creature.addComponent(new LerpData())
+
+//creature.addComponent(new utils.KeepRotatingComponent(Quaternion.Euler(0, 45, 0)))
+
 engine.addEntity(creature)
 
 // ===== End of Lite-bird AI =====
 
 
-/* ================================
- * ====== [4] Particle System ======
- * ================================ */
+  /* ================================
+  * ====== Particle System ======
+  * ================================ */
 
- /*
-// Adjustable Variables
-const particleColor = new Color3(0.5, 0.1, 1)
+  // Adjustable Variables
+  const particleColor = new Color3(0.05, 0.05, 1)
 
-@Component('particle')
-class Particle {
+  @Component('particle')
+  class Particle {
   life = Math.random()
   seed = Math.random() - Math.random()
   constructor(public origin: Vector3) {}
-}
+  }
 
-const material = new Material()
+  const material = new Material()
   material.albedoColor = particleColor;
   material.emissiveColor = particleColor;
   material.emissiveIntensity = 3
 
-let fireHeight = 0
+  let fireHeight = 0
 
-class ParticleSystem {
+  class ParticleSystem {
   group = engine.getComponentGroup(Particle)
   update(dt: number) {
-    if (true) {
+      if (true) {
       fireHeight = fireHeight + (2 - fireHeight) / 10
       shape.visible = true
       for (const entity of this.group.entities) {
-        const particle = entity.getComponent(Particle)
-        const transform = entity.getComponent(Transform)
-        const currentMaterial = (particle.life * 10) | 0
-        particle.life += dt
-        particle.life %= 1
-        transform.position = new Vector3(
+          const particle = entity.getComponent(Particle)
+          const transform = entity.getComponent(Transform)
+          const currentMaterial = (particle.life * 10) | 0
+          particle.life += dt
+          particle.life %= 1
+          transform.position = new Vector3(
           particle.origin.x +
-            Math.sin((particle.life + particle.seed) * 5) *
+              Math.sin((particle.life + particle.seed) * 5) *
               (1 - particle.life / 1.5) *
               0.8,
           particle.origin.y + particle.life * fireHeight * 2,
           particle.origin.z +
-            Math.cos((particle.life + particle.seed) * 5) *
+              Math.cos((particle.life + particle.seed) * 5) *
               (1 - particle.life / 1.5) *
               0.8
-        )
-        const scale = 0.2 - particle.life / 5
-        transform.scale = new Vector3(scale, scale, scale)
-        transform.rotation = Quaternion.Euler(
+          )
+          const scale = 0.2 - particle.life / 5
+          transform.scale = new Vector3(scale, scale, scale)
+          transform.rotation = Quaternion.Euler(
           0,
           0,
           particle.life * 360 + particle.seed * 360
-        )
-        const nextMaterial = (particle.life * 10) | 0
+          )
+          const nextMaterial = (particle.life * 10) | 0
 
       }
-    } else {
+      } else {
       fireHeight = 0
       shape.visible = false
-    }
+      }
   }
-}
+  }
 
-const particles: Entity[] = []
-const origin = new Vector3(-13, 1.2, -4)
-const shape = new PlaneShape()
-const billboard = new Billboard()
+  const particles: Entity[] = []
+  const origin = new Vector3(-32, 1.3, 6)
+  const shape = new PlaneShape()
+  const billboard = new Billboard()
 
-for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 50; i++) {
   const particle = new Entity()
   particle.addComponent(shape)
   particle.addComponent(billboard)
   particle.addComponent(material)
   particle.addComponent(new Particle(origin))
   particle.addComponent(
-    new Transform({ position: origin, scale: new Vector3(0.1, 0.1, 0.1) })
+      new Transform({ position: origin, scale: new Vector3(0.1, 0.1, 0.1) })
   )
   engine.addEntity(particle)
   particles.push(particle)
-}
+  }
 
-engine.addSystem(new ParticleSystem())
+  engine.addSystem(new ParticleSystem())
 
-*/ 
-
-// === End of Particle System ===
+  // === End of Particle System ===
